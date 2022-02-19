@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>二厂班车路线信息(常白班)</title>
+        <style>
+          html,
+          body,
+          #map {
+              width: 100%;
+              height: 100%;
+              margin: 0;
+              padding: 0;
+          }
+        
+          .demo-title {
+              position: absolute;
+              top: 25px;
+              left: 25px;
+              z-index: 1;
+          }
+
+          h1 {
+              font-size: 18px;
+              margin: 0;
+              color: rgb(180, 180, 190);
+          }
+
+          h3 {
+              font-size: 12px;
+              font-weight: normal;
+              margin-top: 5px;
+              color: rgb(150,150,150);
+          }
+      </style>
+    </head>
+
+    <body>
+      <div class="demo-title">
+        <h1>RBAC 二厂班车路线信息(常白班)</h1>
+    </div>
+        <div id="map"></div>
+        <script src="https://webapi.amap.com/maps?v=2.0&key=92aa706e7e5b78f483a2e02df87450cd&plugin=AMap.Scale,AMap.ToolBar"></script>
+        <script src="https://webapi.amap.com/loca?v=2.0.0&key=92aa706e7e5b78f483a2e02df87450cd"></script>
+        <script>
+            var map = ( new AMap.Map('map', {
+                zoom: 11,
+                center: [120.794655,31.335666],
+                // showLabel: false,
+                viewMode: '3D',
+                mapStyle: 'amap://styles/blue',
+                pitch: 40,
+            }));
+
+            var loca = new Loca.Container({
+                map,
+            });
+            window._loca = loca;
+
+//数据
+
+            var json_data = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "type": 1,
+        "Driver":" Mr. wang (MP: 177 1267 7370)",
+        "Bus":" 苏E5G357 (49 Seats)"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [120.574951,31.309978],
+          [120.58004,31.315825],
+          [120.587601,31.316402],
+          [120.66375,31.320356],
+          [120.668609,31.321111],
+          [120.672318,31.32184],
+          [120.68087,31.323238],
+          [120.699653,31.33061]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": 2
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [120.613471,31.342429],
+          [120.631732,31.354459],
+          [120.6344,31.359218],
+          [120.639984,31.357254]
+        ]
+      }
+    }]
+};
+
+            var geo = new Loca.GeoJSONSource({
+                data: json_data,
+            });
+
+            var layer = new Loca.PulseLineLayer({
+                // loca,
+                zIndex: 10,
+                opacity: 1,
+                visible: true,
+                zooms: [2, 22],
+            });
+
+            var headColors = ['#EFBB51', '#7F3CFF', '#4CC19B', '#0B5D74', '#E06AC4', '#223F9B', '#F15C1A', '#7A0FA6'];
+
+            console.log('geo', geo);
+            layer.setSource(geo);
+            layer.setStyle({
+                altitude: 0,
+                lineWidth: 4,
+                // 脉冲头颜色
+                headColor: (_, feature) => {
+                    return headColors[feature.properties.type - 1];
+                },
+                // 脉冲尾颜色
+                trailColor: 'rgba(128, 128, 128, 0.5)',
+                // 脉冲长度，0.25 表示一段脉冲占整条路的 1/4
+                interval: 0.25,
+                // 脉冲线的速度，几秒钟跑完整段路
+                duration: 5000,
+            });
+            loca.add(layer);
+            loca.animate.start();
+
+            //站点
+            var capitals = [{
+    "time":"7:14",
+    "name":"来凤桥公交站（西环路东）",
+    "center":[120.574951,31.309978]
+},{
+    "time":"7:18",
+    "name":"西园路中公交站",
+    "center":[120.58004,31.315825]
+},{
+    "time":"7:20",
+    "name":"西园路东公交站",
+    "center":[120.587601,31.316402]
+},{
+    "time":"7:45",
+    "name":"新城花园公交站",
+    "center":[120.66375,31.320356]
+},{
+    "time":"7:46",
+    "name":"新城邻里中心",
+    "center":[120.668609,31.321111]
+},{
+    "time":"7:50",
+    "name":"新加花园西公交站",
+    "center":[120.672318,31.32184]
+},{
+    "time":"7:53",
+    "name":"沁苑小区公交站",
+    "center":[120.68087,31.323238]
+},{
+    "time":"8:00",
+    "name":"玲珑街与槟榔路交界北",
+    "center":[120.699653,31.33061]
+},
+
+{
+    "time":"7:30",
+    "name":"万达广场公交站",
+    "center":[120.613471,31.342429]
+},{
+    "time":"7:40",
+    "name":"晨曦印象花园",
+    "center":[120.631732,31.354459]
+},{
+    "time":"7:42",
+    "name":"澄和路和古元路交叉口(晨曦馨苑)",
+    "center":[120.6344,31.359218]
+},{
+    "time":"7:45",
+    "name":"苏州国际外国语学校公交站",
+    "center":[120.639984,31.357254]
+}];
+
+            for(var i=0;i<capitals.length;i+=1){
+                var center = capitals[i].center;
+                var circleMarker = new AMap.CircleMarker({
+                    center:center,
+                    radius:2
+            //         strokeColor:'white',
+            //         strokeWeight:2,
+            //         strokeOpacity:0.5,
+            //         fillColor:'rgba(0,0,255,1)',
+            //         fillOpacity:0.5,
+            //         zIndex:10,
+            //         bubble:true,
+                    // cursor:'pointer',
+                    // clickable: true
+                })
+                circleMarker.setMap(map)
+             }
+
+
+            // 图例
+            var lengend = new Loca.Legend({
+                loca: loca,
+                title: {
+                    label: '班车路线',
+                    fontColor: 'rgba(255,255,255,0.4)',
+                    fontSize: '16px'
+                },
+                style: {
+                    backgroundColor: 'rgba(255,255,255,0.1)',
+                    left: '20px',
+                    bottom: '40px',
+                    fontSize: '12px'
+                },
+                dataMap: [
+                    { label: '1号线', color: headColors[0] },
+                    { label: '2号线', color: headColors[1] },
+                    { label: '3号线', color: headColors[2] },
+                    { label: '4号线', color: headColors[3] },
+                    { label: '5号线', color: headColors[4] },
+                    { label: '6号线', color: headColors[5] },
+                    { label: '7号线', color: headColors[6] },
+                    { label: '8号线', color: headColors[7] },
+                    { label: '9号线', color: headColors[0] },
+                    { label: '10号线', color: headColors[1] },
+                    { label: '11号线', color: headColors[2] },
+                    { label: '12号线', color: headColors[3] },
+                    { label: '13号线', color: headColors[4] },
+                    { label: '14号线', color: headColors[5] },
+                    { label: '15号线', color: headColors[6] },
+                    { label: '16号线', color: headColors[7] }
+                ],
+            });
+
+
+
+            loca.animate.start();
+            // var dat = new Loca.Dat();
+            // dat.addLayer(layer, '公交');
+
+
+            
+
+        </script>
+    </body>
+</html>
