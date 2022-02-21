@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>二厂班车路线信息(常白班)</title>
+        <style>
+          html,
+          body,
+          #map {
+              width: 100%;
+              height: 100%;
+              margin: 0;
+              padding: 0;
+          }
+        
+          .demo-title {
+              position: absolute;
+              top: 25px;
+              left: 25px;
+              z-index: 1;
+          }
+
+          h1 {
+              font-size: 18px;
+              margin: 0;
+              color: rgb(180, 180, 190);
+          }
+
+          h3 {
+              font-size: 12px;
+              font-weight: normal;
+              margin-top: 5px;
+              color: rgb(150,150,150);
+          }
+      </style>
+    </head>
+
+    <body>
+      <div class="demo-title">
+        <h1>二厂班车路线信息</h1>
+    </div>
+        <div id="map"></div>
+        <script src="https://webapi.amap.com/maps?v=2.0&key=92aa706e7e5b78f483a2e02df87450cd&plugin=AMap.Scale,AMap.ToolBar"></script>
+        <script src="https://webapi.amap.com/loca?v=2.0.0&key=92aa706e7e5b78f483a2e02df87450cd"></script>
+        <script>
+            var map = ( new AMap.Map('map', {
+                zoom: 11,
+                center: [120.794655,31.335666],
+                // showLabel: false,
+                viewMode: '3D',
+                mapStyle: 'amap://styles/blue',
+                pitch: 40,
+            }));
+
+            var loca = new Loca.Container({
+                map,
+            });
+            window._loca = loca;
+
+//数据
+
+            var json_data = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "type": 1,
+        "Driver":" Mr. wang (MP: 177 1267 7370)",
+        "Bus":" 苏E5G357 (49 Seats)"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [120.574951,31.309978],//1
+          [120.574688,31.310835],
+          [120.574474,31.313516],
+          [120.574645,31.314666],
+          [120.574592,31.315514],
+          [120.577043,31.31567],
+          [120.58004,31.315825],//2
+          [120.587601,31.316402],//3
+          [120.588877,31.316523],
+          [120.588882,31.316701],
+          [120.588721,31.317361],
+          [120.588636,31.318195],
+          [120.588324,31.318053],
+          [120.588083,31.318017],
+          [120.587128,31.318841],
+          [120.586635,31.31941],
+          [120.58554,31.321206],
+          [120.585143,31.321674],
+          [120.585143,31.321674],
+          [120.586275,31.321793],
+          [120.58715,31.321779],
+          [120.587949,31.321669],
+          [120.58841,31.32171],
+          [120.588716,31.322297],
+          [120.588888,31.322961],
+          [120.588904,31.323406],
+          [120.588818,31.324235],
+          [120.589832,31.324299],
+          [120.591087,31.324533],
+          [120.591087,31.324533],
+          [120.592047,31.324785],
+          [120.592198,31.324881],
+          [120.598705,31.326215],
+          [120.602991,31.327099],
+          [120.604332,31.327255],
+          [120.604332,31.327255],
+          [120.609632,31.327237],
+          [120.610319,31.327296],
+          [120.613548,31.327869],
+          [120.614825,31.328094],
+          [120.615774,31.328318],
+          [120.616343,31.328547],
+          [120.616911,31.328854],
+          [120.616911,31.328854],
+          [120.618607,31.330032],
+          [120.618945,31.330146],
+          [120.625983,31.331567],
+          [120.632935,31.332855],
+          [120.633734,31.332928],
+          [120.637446,31.333056],
+          [120.640349,31.333166],
+          [120.646078,31.333519],
+          [120.647655,31.333578],
+          [120.648604,31.333666],
+          [120.650144,31.333803],
+          [120.650825,31.333735],
+          [120.651421,31.33357],
+          [120.652199,31.333176],
+          [120.655686,31.329977],
+          [120.65575,31.329858],
+          [120.656555,31.329322],
+          [120.658207,31.328429],
+          [120.658722,31.327792],
+          [120.658824,31.327535],
+          [120.660492,31.319855],
+          [120.66375,31.320356],//4
+          [120.668609,31.321111],//5
+          [120.674036,31.321968],//6
+          [120.675593,31.322208],
+          [120.675794,31.322183],
+          [120.679231,31.322698],//7
+          [120.683929,31.323528],
+          [120.686665,31.324243],
+          [120.689291,31.32477],
+          [120.69083,31.32499],
+          [120.69318,31.325169],
+          [120.697413,31.325146],
+          [120.700341,31.325332],
+          [120.700209,31.329249],
+          [120.699723,31.330844],//8
+          [120.699303,31.332278],
+          [120.78346,31.346427],
+          [120.78523,31.339848],
+          [120.785627,31.338863],
+          [120.786346,31.337419],
+          [120.787279,31.336036],
+          [120.788143,31.334991],
+          [120.788341,31.334592],
+          [120.788588,31.333236],
+          [120.788947,31.333282]
+        ]
+      }
+    }]
+};
+
+            var geo = new Loca.GeoJSONSource({
+                data: json_data,
+            });
+
+            var layer = new Loca.PulseLineLayer({
+                // loca,
+                zIndex: 10,
+                opacity: 1,
+                visible: true,
+                zooms: [2, 22],
+            });
+
+            var headColors = ['#EFBB51', '#7F3CFF', '#4CC19B', '#0B5D74', '#E06AC4', '#223F9B', '#F15C1A', '#7A0FA6'];
+
+            console.log('geo', geo);
+            layer.setSource(geo);
+            layer.setStyle({
+                altitude: 0,
+                lineWidth: 4,
+                // 脉冲头颜色
+                headColor: (_, feature) => {
+                    return headColors[feature.properties.type - 1];
+                },
+                // 脉冲尾颜色
+                trailColor: 'rgba(128, 128, 128, 0.5)',
+                // 脉冲长度，0.25 表示一段脉冲占整条路的 1/4
+                interval: 0.25,
+                // 脉冲线的速度，几秒钟跑完整段路
+                duration: 5000,
+            });
+            loca.add(layer);
+            loca.animate.start();
+
+            //站点
+            var capitals = [{
+    "time":"7:14",
+    "name":"来凤桥公交站（西环路东）",
+    "center":[120.574951,31.309978]
+},{
+    "time":"7:18",
+    "name":"西园路中公交站",
+    "center":[120.58004,31.315825]
+},{
+    "time":"7:20",
+    "name":"西园路东公交站",
+    "center":[120.587601,31.316402]
+},{
+    "time":"7:45",
+    "name":"新城花园公交站",
+    "center":[120.66375,31.320356]
+},{
+    "time":"7:46",
+    "name":"新城邻里中心",
+    "center":[120.668609,31.321111]
+},{
+    "time":"7:50",
+    "name":"新加花园西公交站",
+    "center":[120.674036,31.321968]
+},{
+    "time":"7:53",
+    "name":"沁苑小区公交站",
+    "center":[120.679231,31.322698]
+},{
+    "time":"8:00",
+    "name":"玲珑街与槟榔路交界北",
+    "center":[120.699723,31.330844]
+},
+
+{
+    "time":"7:30",
+    "name":"万达广场公交站",
+    "center":[120.613471,31.342429]
+},{
+    "time":"7:40",
+    "name":"晨曦印象花园",
+    "center":[120.631732,31.354459]
+},{
+    "time":"7:42",
+    "name":"澄和路和古元路交叉口(晨曦馨苑)",
+    "center":[120.6344,31.359218]
+},{
+    "time":"7:45",
+    "name":"苏州国际外国语学校公交站",
+    "center":[120.639984,31.357254]
+}];
+
+            for(var i=0;i<capitals.length;i+=1){
+                var center = capitals[i].center;
+                var circleMarker = new AMap.CircleMarker({
+                    center:center,
+                    radius:2
+            //         strokeColor:'white',
+            //         strokeWeight:2,
+            //         strokeOpacity:0.5,
+            //         fillColor:'rgba(0,0,255,1)',
+            //         fillOpacity:0.5,
+            //         zIndex:10,
+            //         bubble:true,
+                    // cursor:'pointer',
+                    // clickable: true
+                })
+                circleMarker.setMap(map)
+             }
+
+
+            // 图例
+            var lengend = new Loca.Legend({
+                loca: loca,
+                title: {
+                    label: '班车路线',
+                    fontColor: 'rgba(255,255,255,0.4)',
+                    fontSize: '16px'
+                },
+                style: {
+                    backgroundColor: 'rgba(255,255,255,0.1)',
+                    left: '20px',
+                    bottom: '40px',
+                    fontSize: '12px'
+                },
+                dataMap: [
+                    { label: '1号线', color: headColors[0] },
+                    { label: '2号线', color: headColors[1] },
+                    { label: '3号线', color: headColors[2] },
+                    { label: '4号线', color: headColors[3] },
+                    { label: '5号线', color: headColors[4] },
+                    { label: '6号线', color: headColors[5] },
+                    { label: '7号线', color: headColors[6] },
+                    { label: '8号线', color: headColors[7] },
+                    { label: '9号线', color: headColors[0] },
+                    { label: '10号线', color: headColors[1] },
+                    { label: '11号线', color: headColors[2] },
+                    { label: '12号线', color: headColors[3] },
+                    { label: '13号线', color: headColors[4] },
+                    { label: '14号线', color: headColors[5] },
+                    { label: '15号线', color: headColors[6] },
+                    { label: '16号线', color: headColors[7] }
+                ],
+            });
+
+
+
+            loca.animate.start();
+            // var dat = new Loca.Dat();
+            // dat.addLayer(layer, '公交');
+
+
+            
+
+        </script>
+    </body>
+</html>
