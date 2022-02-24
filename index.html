@@ -48,13 +48,13 @@
         <script>
           var map = new AMap.Map('map', {
             zoom: 12,
-            center: [120.794655,31.335666],
+            center: [120.677983,31.218496],
             // showLabel: false,
-            // viewMode: '3D',
+            viewMode: '3D',
             mapStyle: 'amap://styles/blue',
             rotateEnable: false,
             pitchEnable: false,
-            // pitch: 40,
+            pitch: 40,
           });
 
           var loca = new Loca.Container({
@@ -74,7 +74,7 @@
                 zooms: [2, 22],
               });
 
-          var headColors = ['#EFBB51', '#7F3CFF', '#4CC19B', '#E06AC4', '#F15C1A', '#7A0FA6', '#6699CC', '#990000', '#996600','#CC0099', '#CCCCCC', '#33FFFF', '#FF99CC', '#FFFF33', '#336699', '#6699CC', '#99CCCC','#CC6666', '#999999', '#FF99FF', '#FFFFCC','#99FFFF', '#6699CC', '#FFFFFF'];
+          var headColors = ['#EFBB51', '#7F3CFF', '#4CC19B', '#E06AC4', '#F15C1A', '#7A0FA6', '#6699CC', '#990000', '#996600','#CC0099', '#CCCCCC', '#33FFFF', '#FF99CC', '#FFFF33', '#666699', '#6699CC', '#99CCCC','#CC6666', '#999999', '#FF99FF', '#FFFFCC','#99FFFF', '#6699CC', '#FFFFFF'];
 
           layer.setSource(geo);
           layer.setStyle({
@@ -148,8 +148,8 @@
               { label: '16号线', color: headColors[15] },
               { label: '17号线', color: headColors[16] },
               { label: '18号线', color: headColors[17] },
-              { label: '19号线', color: headColors[18] },
-              { label: '20号线', color: headColors[19] },
+              { label: '尹山湖A', color: headColors[18] },
+              { label: '尹山湖B', color: headColors[19] },
               { label: '21号线', color: headColors[20] },
               { label: '22号线', color: headColors[21] },
               { label: '23号线', color: headColors[22] },
