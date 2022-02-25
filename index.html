@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>班车路线参考</title>
+  <title>班车路线信息</title>
   <style>
     html,
     body,
@@ -13,7 +13,26 @@
       margin: 0;
       padding: 0;
     }
- 
+
+         /* .demo-title {
+              position: absolute;
+              top: 25px;
+              left: 25px;
+              z-index: 1;
+          }
+
+          h1 {
+              font-size: 18px;
+              margin: 0;
+              color: rgb(180, 180, 190);
+          }
+
+          h3 {
+              font-size: 12px;
+              font-weight: normal;
+              margin-top: 5px;
+              color: rgb(150,150,150);
+          }*/
         </style>
       </head>
 
@@ -29,7 +48,7 @@
         <script>
           var map = new AMap.Map('map', {
             zoom: 12,
-            zooms:[11,22],
+            zooms:[10,22],
             center: [120.677983,31.218496],
             // showLabel: false,
             viewMode: '3D',
@@ -84,10 +103,10 @@
               var circleMarker = new AMap.CircleMarker({
                 cursor:'pointer',
                 center:center,
-                radius:2,
+                radius:3,
                 extData: [capitals[i][j],i+1],
                 strokeColor:headColors[i],
-                zooms: [12, 22],
+                zooms: [11, 22],
               })
               circleMarker.setMap(map);
               circleMarker.on('click', function(e){
@@ -107,9 +126,9 @@
               style:{
                 'border-radius': '.75rem',
                 'background-color': headColors[i],
-                'width': '0.9rem',
+                // 'width': '0.9rem',
                 'text-align': 'center',
-                'font-size': '1px',
+                'font-size': '12px',
               },
               position: capitals[i][0].center
             });
@@ -132,7 +151,6 @@
             infoWindow.open(map, opts.center);
           }
 
-          map.setFitView();
         </script>
       </body>
       </html>
