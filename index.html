@@ -24,11 +24,11 @@
 <script>
   var map = new AMap.Map('map', {
     zoom: 12,
-    zooms:[8,22],
+    zooms:[10,20],
     center: [120.677983,31.218496],
               // showLabel: false,
               viewMode: '3D',
-              mapStyle: 'amap://styles/whitesmoke',
+              mapStyle: 'amap://styles/light',
               rotateEnable: false,
               pitchEnable: false,
               pitch: 40,
@@ -79,7 +79,7 @@
       var circleMarker = new AMap.CircleMarker({
         cursor:'pointer',
         center:center,
-        radius:4,
+        radius:3,
         extData: [capitals[i][j],i+1],
         strokeColor:headColors[i],
         zooms: [11.5, 22],
@@ -115,6 +115,7 @@
     icon: "star.png",
     position: [120.788947,31.333282],
     anchor:'center',
+    zooms:[11,22]
   });
   map.add(marker);
 
