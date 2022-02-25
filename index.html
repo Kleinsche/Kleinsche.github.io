@@ -13,6 +13,26 @@
       margin: 0;
       padding: 0;
     }
+
+         /* .demo-title {
+              position: absolute;
+              top: 25px;
+              left: 25px;
+              z-index: 1;
+          }
+
+          h1 {
+              font-size: 18px;
+              margin: 0;
+              color: rgb(180, 180, 190);
+          }
+
+          h3 {
+              font-size: 12px;
+              font-weight: normal;
+              margin-top: 5px;
+              color: rgb(150,150,150);
+          }*/
         </style>
       </head>
 
@@ -28,7 +48,7 @@
         <script>
           var map = new AMap.Map('map', {
             zoom: 12,
-            zooms:[10,22],
+            zooms:[8,22],
             center: [120.677983,31.218496],
             // showLabel: false,
             viewMode: '3D',
@@ -52,7 +72,7 @@
                 zIndex: 10,
                 opacity: 1,
                 visible: true,
-                zooms: [11, 22],
+                zooms: [9, 22],
               });
 
           var headColors = ['#EFBB51', '#7F3CFF', '#4CC19B', '#E06AC4', '#F15C1A', '#7A0FA6', '#6699CC', '#990000', '#996600','#CC0099', '#CCCCCC', '#33FFFF', '#FF99CC', '#FFFF33', '#666699', '#6699CC', '#99CCCC','#CC6666', '#999999', '#FF99FF', '#FFFFCC','#99FFFF', '#6699CC', '#FFFFFF'];
@@ -86,7 +106,7 @@
                 radius:3,
                 extData: [capitals[i][j],i+1],
                 strokeColor:headColors[i],
-                zooms: [11, 22],
+                zooms: [9, 22],
               })
               circleMarker.setMap(map);
               circleMarker.on('click', function(e){
@@ -97,7 +117,7 @@
               text:i+1,
               anchor:'center', 
               cursor:'default',
-              zooms: [12, 22],
+              zooms: [10, 22],
               extData: capitals[i][0],
               bubble:true,
               offset: new AMap.Pixel(0, -15),
@@ -106,9 +126,9 @@
               style:{
                 'border-radius': '.75rem',
                 'background-color': headColors[i],
-                'width': '0.9rem',
+                'width': '1em',
                 'text-align': 'center',
-                'font-size': '16px',
+                'font-size': '1em',
               },
               position: capitals[i][0].center
             });
