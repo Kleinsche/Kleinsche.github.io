@@ -28,11 +28,16 @@
     center: [120.677983,31.218496],
               // showLabel: false,
               viewMode: '3D',
-              mapStyle: 'amap://styles/light',
+              mapStyle: 'amap://styles/blue',
               rotateEnable: false,
               pitchEnable: false,
               pitch: 40,
             });
+
+  var southWest = new AMap.LngLat(120.337717,31.113207);
+  var northEast = new AMap.LngLat(120.901453,31.485184);
+  var bounds = new AMap.Bounds(southWest, northEast);
+  map.setLimitBounds(bounds);
 
   var loca = new Loca.Container({
     map,
@@ -79,7 +84,7 @@
       var circleMarker = new AMap.CircleMarker({
         cursor:'pointer',
         center:center,
-        radius:5,
+        radius:3,
         extData: [capitals[i][j],i+1],
         strokeColor:headColors[i],
         zooms: [11.5, 22],
