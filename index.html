@@ -48,6 +48,7 @@
         <script>
           var map = new AMap.Map('map', {
             zoom: 12,
+            zooms:[11,22],
             center: [120.677983,31.218496],
             // showLabel: false,
             viewMode: '3D',
@@ -71,7 +72,7 @@
                 zIndex: 10,
                 opacity: 1,
                 visible: true,
-                zooms: [2, 22],
+                zooms: [11, 22],
               });
 
           var headColors = ['#EFBB51', '#7F3CFF', '#4CC19B', '#E06AC4', '#F15C1A', '#7A0FA6', '#6699CC', '#990000', '#996600','#CC0099', '#CCCCCC', '#33FFFF', '#FF99CC', '#FFFF33', '#666699', '#6699CC', '#99CCCC','#CC6666', '#999999', '#FF99FF', '#FFFFCC','#99FFFF', '#6699CC', '#FFFFFF'];
@@ -89,86 +90,68 @@
                 // 脉冲长度，0.25 表示一段脉冲占整条路的 1/4
                 interval: 1,
                 // 脉冲线的速度，几秒钟跑完整段路
-                duration: 5000,
+                duration: 2500,
               });
           loca.add(layer);
           loca.animate.start();
 
-            for (var i=0; i<capitals.length; i+=1) {
-              for(var j=0;j<capitals[i].length;j+=1){
-                var time = capitals[i][j].time;
-                var name = capitals[i][j].name;
-                var center = capitals[i][j].center;
-                var circleMarker = new AMap.CircleMarker({
-                  center:center,
-                  radius:3,
-                  extData: capitals[i][j],
-                  strokeColor:headColors[i],
-                  // zIndex:10,
-                  // bubble:true,
-                })
-                circleMarker.setMap(map);
-                circleMarker.on('click', function(e){
-                  openInfo(e.target._opts);
-                });
-              }
-            }
-
-
-            // 图例
-            var lengend = new Loca.Legend({
-              loca: loca,
-              title: {
-                label: '班车路线',
-                fontColor: 'rgba(255,255,255,0.4)',
-                fontSize: '12px'
-              },
-              style: {
-                backgroundColor: 'rgba(255,255,255,0.1)',
-                left: '10px',
-                bottom: '20px',
-                fontSize: '12px'
-              },
-              dataMap: [
-              { label: '1号线', color: headColors[0] },
-              { label: '2号线', color: headColors[1] },
-              { label: '3号线', color: headColors[2] },
-              { label: '4号线', color: headColors[3] },
-              { label: '5号线', color: headColors[4] },
-              { label: '6号线', color: headColors[5] },
-              { label: '7号线', color: headColors[6] },
-              { label: '8号线', color: headColors[7] },
-              { label: '9号线', color: headColors[8] },
-              { label: '10号线', color: headColors[9] },
-              { label: '11号线', color: headColors[10] },
-              { label: '12号线', color: headColors[11] },
-              { label: '13号线', color: headColors[12] },
-              { label: '14号线', color: headColors[13] },
-              { label: '15号线', color: headColors[14] },
-              { label: '16号线', color: headColors[15] },
-              { label: '17号线', color: headColors[16] },
-              { label: '18号线', color: headColors[17] },
-              { label: '尹山湖A', color: headColors[18] },
-              { label: '尹山湖B', color: headColors[19] },
-              { label: '21号线', color: headColors[20] },
-              { label: '22号线', color: headColors[21] },
-              { label: '23号线', color: headColors[22] },
-              { label: '24号线', color: headColors[23] }
-              ],
-            });
-
-            var infoWindow;
-            function openInfo(opts) {
-              var info = [];
-              info.push("<div><div><img style=\"float:left;\" src=\" bosch.png \"/></div> ");
-              info.push("<div style=\"padding:0px 0px 0px 4px;\"><b>时间: " + opts.extData.time + "</b>");
-              info.push("地址: "+ opts.extData.name);
-              infoWindow = new AMap.InfoWindow({
-                content: info.join("<br>")
+          for (var i=0; i<capitals.length; i+=1) {
+            for(var j=0;j<capitals[i].length;j+=1){
+              var time = capitals[i][j].time;
+              var name = capitals[i][j].name;
+              var center = capitals[i][j].center;
+              var circleMarker = new AMap.CircleMarker({
+                cursor:'pointer',
+                center:center,
+                radius:2,
+                extData: [capitals[i][j],i+1],
+                strokeColor:headColors[i],
+                zooms: [12, 22],
+              })
+              circleMarker.setMap(map);
+              circleMarker.on('click', function(e){
+                openInfo(e.target._opts);
               });
-              infoWindow.open(map, opts.center);
             }
+            var text = new AMap.Text({
+              text:i+1,
+              anchor:'center', 
+              cursor:'default',
+              zooms: [12, 22],
+              extData: capitals[i][0],
+              bubble:true,
+              offset: new AMap.Pixel(0, -15),
+              zIndex:0,
+              clickable:false,
+              style:{
+                'border-radius': '.75rem',
+                'background-color': headColors[i],
+                'width': '0.9rem',
+                'text-align': 'center',
+                'font-size': '1px',
+              },
+              position: capitals[i][0].center
+            });
+            text.setMap(map);
+          }
 
-          </script>
-        </body>
-        </html>
+          var infoWindow = new AMap.InfoWindow();
+          function openInfo(opts,num) {
+            var info = [];
+            info.push("<div><div><img style=\"float:left;\" src=\" bosch.png \"/></div> ");
+            info.push("<div style=\"padding:0px 0px 0px 4px;\"><b>线路: " + opts.extData[1] + "</b>");
+            info.push("车牌: " + opts.extData[0].bus);
+            info.push("司机: "+ opts.extData[0].driver);
+            info.push("电话: "+ opts.extData[0].tel);
+            info.push("时间: "+ opts.extData[0].time);
+            info.push("地址: "+ opts.extData[0].name);
+            infoWindow = new AMap.InfoWindow({
+              content: info.join("<br>")
+            });
+            infoWindow.open(map, opts.center);
+          }
+
+          map.setFitView();
+        </script>
+      </body>
+      </html>
