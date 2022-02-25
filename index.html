@@ -23,7 +23,7 @@
 <script src="station.js"></script>
 <script>
   var map = new AMap.Map('map', {
-    zoom: 12,
+    zoom: 12.5,
     zooms:[11,20],
     center: [120.677983,31.218496],
               // showLabel: false,
@@ -34,10 +34,10 @@
               pitch: 40,
             });
 
-//   var southWest = new AMap.LngLat(119.999201,30.962814);
-//   var northEast = new AMap.LngLat(121.126673,31.70648);
-//   var bounds = new AMap.Bounds(southWest, northEast);
-//   map.setLimitBounds(bounds);
+  // var southWest = new AMap.LngLat(120.244452,31.038303);
+  // var northEast = new AMap.LngLat(121.111514,31.591503);
+  // var bounds = new AMap.Bounds(southWest, northEast);
+  // map.setLimitBounds(bounds);
 
   var loca = new Loca.Container({
     map,
@@ -87,7 +87,7 @@
         radius:2,
         extData: [capitals[i][j],i+1],
         strokeColor:headColors[i],
-        zooms: [11.5, 22],
+        zooms: [11.7, 22],
       })
       circleMarker.setMap(map);
       circleMarker.on('click', function(e){
@@ -98,7 +98,7 @@
       text:i+1,
       anchor:'center', 
       cursor:'default',
-      zooms: [11.7, 22],
+      zooms: [12.3, 22],
       extData: capitals[i][0],
       bubble:true,
       offset: new AMap.Pixel(0, -15),
